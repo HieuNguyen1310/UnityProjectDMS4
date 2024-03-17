@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "THE PROBLEMS.sln"
+    "dotnet.defaultSolution": "UnityProjectDMS4.sln"
 }
