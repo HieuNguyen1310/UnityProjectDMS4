@@ -1,8 +1,11 @@
  using UnityEngine;
+using UnityEngine.LowLevel;
 
 public class SimpleCharacterController : MonoBehaviour
 {
     public float speed = 5.0f; // Speed of the character
+
+    public PlayerHealth playerSystem;
     
 
     // Update is called once per frame
@@ -17,6 +20,13 @@ public class SimpleCharacterController : MonoBehaviour
 
         // Apply the movement to the character's position
         transform.position += movement * speed * Time.deltaTime;
+
+        if (playerSystem.currentHealth <= 0) 
+        {
+            // moveHorizontal = 0;
+            // moveVertical = 0;
+            speed = 0;
+        }
         
     }
 

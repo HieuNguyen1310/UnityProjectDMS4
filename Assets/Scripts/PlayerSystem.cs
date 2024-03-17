@@ -78,7 +78,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= damage;
 
-        Debug.Log(currentHealth);
+        // Debug.Log(currentHealth);
 
         // // Handle health related logic here (e.g., death checks, visual/sound effects)
         // if (currentHealth <= 0)
