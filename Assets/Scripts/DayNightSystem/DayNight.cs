@@ -16,9 +16,14 @@ public class DayNight : MonoBehaviour
    public int hours;
    public int days = 0;
 
+   public float weightChangeSpeed = 0.1f; // Adjust this value to control transition speed
+
+
 
    // Random Check
-   [SerializeField] private bool isDay = true; // Track current state
+   [SerializeField] private bool isDay; // Track current state
+
+//    public float dayCheck;
    [SerializeField] private float nextChangeChance; //init chance of change
 
 //    public bool activeLight; // check if lights on
@@ -29,14 +34,18 @@ public class DayNight : MonoBehaviour
    {
     // ppv = GameObject.GetComponent<Volume>();
     hours = 8;
+    ppv.weight = 0;
     lights.SetActive(false);
+    isDay = true;
+    // dayCheck = 1;
     // activeLight = false;
    }
 
-   void FixedUpdate()
+   void Update()
    {
     CalcTime();
     DisplayTime();
+    ControlPPV();
    }
 
     public void CalcTime() // calc secs, mins, hours
@@ -103,16 +112,20 @@ public class DayNight : MonoBehaviour
         // ChangeCheck();
         if (isDay == false) // Change to Night
         {
-            ppv.weight = 1;
+            ppv.weight = Mathf.Lerp(ppv.weight, 1f, weightChangeSpeed * Time.deltaTime);
             lights.SetActive(true);
-            Debug.Log("Night");
+            // dayCheck = 0;
+            // Debug.Log("Night");
+            // Debug.Log("Night, ppv.weight: " + ppv.weight);
         }
 
         else if (isDay == true) // Change to Day
         {
-            ppv.weight = 0;
+            ppv.weight = Mathf.Lerp(ppv.weight, 0f, weightChangeSpeed * Time.deltaTime);
             lights.SetActive(false);
-            Debug.Log("Day");
+            // dayCheck = 1;
+            // Debug.Log("Day");
+            // Debug.Log("Day, ppv.weight: " + ppv.weight);
         }
 
 

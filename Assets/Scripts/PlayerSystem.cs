@@ -15,13 +15,21 @@ public class PlayerHealth : MonoBehaviour
 
     public Color deadColor; // Color to change to when player dead
 
+    public Color HealingColor; // Color to change to when player is healing
+
     public Slider HP;
 
     public SpriteRenderer spriteRenderer; // Reference to the player's sprite renderer
 
     public Rigidbody2D myRigidBody;
     public float DPS;  // Damage per second (outside the trigger zone)
-    private bool isInTriggerZone;  // Flag to track player's location
+
+    public float HealPS; // Heal per Sec (Inside the Heal Zone)
+    [SerializeField]private bool isInTriggerZone;  // Flag to track player's location
+    [SerializeField] private bool isInHealZone = false; // Falg to track player if in Heal Zone
+
+    // public DayNight dayCheck;
+    // [SerializeField] private float dayNightValue;
 
     void Start()
     {
@@ -29,14 +37,24 @@ public class PlayerHealth : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>(); // Get the sprite renderer component
         isInTriggerZone = false;  // Initially, player is not in the trigger zone
         spriteRenderer.color = defaultColor;
+
+        // dayCheck = GetComponent<DayNight>();
     }
 
     void Update()
     {
+        // dayNightValue = dayCheck.ppv.weight;
         // Handle damage based on isInTriggerZone flag
         if (!isInTriggerZone)
-        {
+        {   
+            
             TakeDamage(DPS * Time.deltaTime); // Apply damage outside the trigger zone
+            
+        }
+
+        if (currentHealth > 0 && currentHealth < maxHealth && isInHealZone == true)
+        {
+            healPlayer(HealPS * Time.deltaTime);
         }
 
          // Handle health related logic here (e.g., death checks, visual/sound effects)
@@ -64,7 +82,15 @@ public class PlayerHealth : MonoBehaviour
         {
             isInTriggerZone = true;  // Set flag when entering the trigger zone
         }
+
+        if (other.gameObject.tag == "Heal Zone") 
+        {
+            isInHealZone = true;
+            
+        }
     }
+
+    
 
     void OnTriggerExit2D(Collider2D other)
     {
@@ -72,25 +98,20 @@ public class PlayerHealth : MonoBehaviour
         {
             isInTriggerZone = false;  // Reset flag when leaving the trigger zone
         }
+
+        if (other.gameObject.tag == "Heal Zone") // Replace with your trigger zone tag
+        {
+            isInHealZone = false;  // Reset flag when leaving the trigger zone
+        }
     }
 
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
 
-        // Debug.Log(currentHealth);
+    }
 
-        // // Handle health related logic here (e.g., death checks, visual/sound effects)
-        // if (currentHealth <= 0)
-        // {
-        //     // Player is dead!
-        //     currentHealth = 0;
-        //     myRigidBody.velocity = Vector2.zero; //Stop player movement
-
-        //     spriteRenderer.color = ddeadColor; //Change player dead color
-
-        //     Debug.Log("Player is dead!");
-        //     // Implement your death logic here (e.g., disable movement, play death animation)
-        // }
+    public void healPlayer(float heal) {
+        currentHealth += heal;
     }
 }

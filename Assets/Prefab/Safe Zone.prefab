@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 7846429748845914284}
   - component: {fileID: 1495626825374909576}
   - component: {fileID: 2836707009178733681}
+  - component: {fileID: -2360894296300212512}
   m_Layer: 0
   m_Name: Safe Zone
-  m_TagString: Safe Zone
+  m_TagString: Heal Zone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.37891603, g: 0.60571104, b: 0.6132076, a: 1}
+  m_Color: {r: 0.21060553, g: 1, b: 0.1745283, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -120,3 +121,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &-2360894296300212512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6620326394446230728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b01f0962aaa7ea4ebba706c96233676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToDestroy: {fileID: 6620326394446230728}
+  minDuration: 2
+  maxDuration: 5
