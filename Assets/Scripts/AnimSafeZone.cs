@@ -12,6 +12,11 @@ public class SafeZoneAnim : MonoBehaviour
     private Vector3 startPosition;
     private bool moveUp = true; // Flag to control movement direction
 
+    // Test
+    public SwingingObject rotateAngle;
+    //
+
+
     void Start()
     {
         startPosition = transform.position;
@@ -33,6 +38,29 @@ public class SafeZoneAnim : MonoBehaviour
 
             transform.position = new Vector3(targetX, targetY, transform.position.z);
         }
+
+        //========================================================================
+
+
+        //========================================================================
+
+
+        // float ease = Mathf.SmoothStep(0.0f, 0.5f, Mathf.PingPong(Time.time * speed, 1.0f)); // Ease value based on PingPong
+
+        // if (left == true)
+        // {
+        //     float targetX = startPosition.x - moveDistance * ease;
+        //     float targetY = startPosition.y + (moveUp ? moveDistance * ease : -moveDistance * ease);
+
+        //     transform.position = new Vector3(targetX, targetY, transform.position.z);
+        // }
+        // else
+        // {
+        //     float targetX = startPosition.x + moveDistance * ease;
+        //     float targetY = startPosition.y + (moveUp ? moveDistance * ease : -moveDistance * ease);
+
+        //     transform.position = new Vector3(targetX, targetY, transform.position.z);
+        // }
 
         // Change direction at movement boundaries
         if (Mathf.Abs(transform.position.x - startPosition.x) >= moveDistance)
