@@ -10,12 +10,22 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth;  // Maximum health points
     public float currentHealth;  // Current health points
 
-    public Color defaultColor; // Player's default color
-    public Color damageColor; // Color to change to when taking damage
+    // public Color defaultColor; // Player's default color
+    // public Color damageColor; // Color to change to when taking damage
 
-    public Color deadColor; // Color to change to when player dead
+    // public Color deadColor; // Color to change to when player dead
 
-    public Color HealingColor; // Color to change to when player is healing
+    // public spri
+
+    // public Color HealingColor; // Color to change to when player is healing
+
+    public Sprite defaultSprite;
+
+    public Sprite damageSprite;
+
+    public Sprite deadSprite;
+
+    public Sprite healSprite;
 
     public Slider HP;
 
@@ -36,7 +46,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;  // Initialize health at start
         spriteRenderer = GetComponent<SpriteRenderer>(); // Get the sprite renderer component
         isInTriggerZone = false;  // Initially, player is not in the trigger zone
-        spriteRenderer.color = defaultColor;
+        spriteRenderer.sprite = defaultSprite;
 
         // dayCheck = GetComponent<DayNight>();
     }
@@ -64,7 +74,7 @@ public class PlayerHealth : MonoBehaviour
             currentHealth = 0;
             myRigidBody.velocity = Vector2.zero; //Stop player movement
 
-            spriteRenderer.color = deadColor; //Change player dead color
+            spriteRenderer.sprite = deadSprite; //Change player dead color
 
             Debug.Log("Player is dead!");
             // Implement your death logic here (e.g., disable movement, play death animation)
@@ -72,7 +82,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= maxHealth /4 && currentHealth > 0) 
         {
-            spriteRenderer.color = damageColor;
+            spriteRenderer.sprite = damageSprite;
         }
     }
 
@@ -86,7 +96,7 @@ public class PlayerHealth : MonoBehaviour
         if (other.gameObject.tag == "Heal Zone") 
         {
             isInHealZone = true;
-            
+            spriteRenderer.sprite = healSprite;
         }
     }
 
@@ -102,6 +112,7 @@ public class PlayerHealth : MonoBehaviour
         if (other.gameObject.tag == "Heal Zone") // Replace with your trigger zone tag
         {
             isInHealZone = false;  // Reset flag when leaving the trigger zone
+            spriteRenderer.sprite = defaultSprite;
         }
     }
 
