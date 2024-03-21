@@ -9,6 +9,9 @@ public class PlayerHealth : MonoBehaviour
 {
     public float maxHealth;  // Maximum health points
     public float currentHealth;  // Current health points
+    public AudioSource HealingSource;
+
+    public AudioSource OnDeadSource;
 
     // public Color defaultColor; // Player's default color
     // public Color damageColor; // Color to change to when taking damage
@@ -65,6 +68,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth > 0 && currentHealth < maxHealth && isInHealZone == true)
         {
             healPlayer(HealPS * Time.deltaTime);
+            HealingSource.Play();
         }
 
          // Handle health related logic here (e.g., death checks, visual/sound effects)
@@ -76,7 +80,9 @@ public class PlayerHealth : MonoBehaviour
 
             spriteRenderer.sprite = deadSprite; //Change player dead color
 
-            Debug.Log("Player is dead!");
+            FindAnyObjectByType<GameManager>().EndGame();
+            OnDeadSource.Play();
+            // Debug.Log("Player is dead!");
             // Implement your death logic here (e.g., disable movement, play death animation)
         }
 

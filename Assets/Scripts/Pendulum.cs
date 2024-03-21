@@ -10,7 +10,7 @@ public class SwingingObject : MonoBehaviour
   void Update()
   {
     currentAngle = Mathf.Sin(Time.time * swingSpeed) * maxSwingAngle;
-    Debug.Log(currentAngle);
+    // Debug.Log(currentAngle);
     transform.localRotation = Quaternion.Euler(0, 0, currentAngle);
   }
 }
